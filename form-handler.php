@@ -1,5 +1,3 @@
 <?php
 
-$counter = new \Simplecov\CounterScore();
-
-$counter->getRequest();
+//$counter = new \Simplecov\CounterScore();

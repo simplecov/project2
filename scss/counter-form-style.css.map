@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,mBAAoB;EAClB,UAAU,EAAE,IAAc",
-"sources": ["counter-form-style.scss"],
-"names": [],
-"file": "counter-form-style.css"
-}
