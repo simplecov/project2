@@ -12,6 +12,12 @@ class CounterScore{
     {
         $this->pluginFolder = plugin_dir_url(__FILE__);
         add_action( 'wp_enqueue_scripts', array( '\Simplecov\CounterScore', 'registerStuff' ) );
+
+        /**
+         * @TODO переделать это на register_activation_hook
+         */
+        $this->createDBTable();
+        //register_activation_hook( __FILE__, array( '\Simplecov\CounterScore', 'createDBTable' ) );
     }
 
     /**
@@ -32,9 +38,8 @@ class CounterScore{
     }
 
     /**
+     * Выводит на экран переданную информацию
      * @param $foo - array, int, string
-     *
-     * Дебаггинг
      */
     public function bug($foo)
     {
@@ -43,7 +48,12 @@ class CounterScore{
         echo '</pre>';
     }
 
-    public function showMessage($message, $error = false)
+    /**
+     * Выводит сообщение в админку
+     * @param $message - string - текст сообщения для вывода в админке
+     * @param bool $error
+     */
+    public static function showMessage($message = 'asdasdasdasdas', $error = false)
     {
         if(strlen($message) > 0)
         {
@@ -60,30 +70,31 @@ class CounterScore{
     public function getRequest()
     {
         $this->request = $_REQUEST;
+        return $this->request;
     }
 
-    private function createDBTable()
+    /**
+     * Создание таблицы
+     */
+    public function createDBTable()
     {
         global $wpdb;
         $tableName = $wpdb->prefix . 'counter_score_plugin';
 
-        //$this->showMessage('nice!');
+        if($wpdb->get_var("SHOW TABLES LIKE '$tableName'") != $tableName)
+        {
+            $sql = "CREATE TABLE " . $tableName . " (
+              id int NOT NULL AUTO_INCREMENT,
+              time int DEFAULT '0' NOT NULL,
+              name int NOT NULL,
+              text int NOT NULL,
+              url VARCHAR(55) NOT NULL,
+              UNIQUE KEY id (id)
+            );";
 
-//        if($wpdb->get_var("SHOW TABLES LIKE '$tableName'") != $tableName)
-//        {
-//            $sql = "CREATE TABLE " . $tableName . " (
-//              id mediumint(9) NOT NULL AUTO_INCREMENT,
-//              time bigint(11) DEFAULT '0' NOT NULL,
-//              name tinytext NOT NULL,
-//              text text NOT NULL,
-//              url VARCHAR(55) NOT NULL,
-//              UNIQUE KEY id (id)
-//            );";
-//
-//            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-//
-//            dbDelta($sql);
-//        }
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            dbDelta($sql);
+        }
     }
 
 }
