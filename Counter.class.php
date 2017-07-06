@@ -142,8 +142,8 @@ class CounterScore{
         {
             $sql = "CREATE TABLE " . $this->tableName . " (
               id int NOT NULL AUTO_INCREMENT,
-              firstname int NOT NULL,
-              lastname int NOT NULL,
+              firstname varchar NOT NULL,
+              lastname varchar NOT NULL,
               apartment int NOT NULL,
               month int NOT NULL,
               year int NOT NULL,

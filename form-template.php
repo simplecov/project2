@@ -33,19 +33,19 @@ global $cs;
 
 
     <label class="counter-label">
-        <input class="counter-input" name="water_cold_1" type="number" placeholder="Холодная вода 1" value="<?=$cs->getRequest('water-cold-1')?>">
+        <input class="counter-input" name="water_cold_1" type="number" placeholder="Холодная вода 1" value="<?=$cs->getRequest('water_cold_1')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water_cold_2" type="number" placeholder="Холодная вода 2" value="<?=$cs->getRequest('water-cold-2')?>">
+        <input class="counter-input" name="water_cold_2" type="number" placeholder="Холодная вода 2" value="<?=$cs->getRequest('water_cold_2')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water_hot_1" type="number" placeholder="Горячая вода 1" value="<?=$cs->getRequest('water-hot-1')?>">
+        <input class="counter-input" name="water_hot_1" type="number" placeholder="Горячая вода 1" value="<?=$cs->getRequest('water_hot_1')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water_hot_2" type="number" placeholder="Горячая вода 2" value="<?=$cs->getRequest('water-hot-2')?>">
+        <input class="counter-input" name="water_hot_2" type="number" placeholder="Горячая вода 2" value="<?=$cs->getRequest('water_hot_2')?>">
     </label>
 
     <label class="counter-label">
