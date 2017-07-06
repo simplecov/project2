@@ -1,33 +1,19 @@
 <?
-$cs = new \Simplecov\CounterScore();
-
-$cs->bug($cs->getRequest('firstname'));
+global $cs;
 ?>
 
-<form id="counter-score-form" class="counter-score-form">
+<form id="counter-score-form" method="get" class="counter-score-form">
 
     <label class="counter-label">
         <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequest('firstname')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="lastname" type="text" placeholder="Ваша фамилия">
+        <input class="counter-input" name="lastname" type="text" placeholder="Ваша фамилия" value="<?=$cs->getRequest('lastname')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="apartment" type="number" placeholder="Номер квартиры">
-    </label>
-
-
-    <div class="counter-form-divider"></div>
-
-
-    <label class="counter-label">
-        <input class="counter-input" name="month" type="number" placeholder="Месяц">
-    </label>
-
-    <label class="counter-label">
-        <input class="counter-input" name="year" type="number" placeholder="Год">
+        <input class="counter-input" name="apartment" type="number" placeholder="Номер квартиры" value="<?=$cs->getRequest('apartment')?>">
     </label>
 
 
@@ -35,23 +21,35 @@ $cs->bug($cs->getRequest('firstname'));
 
 
     <label class="counter-label">
-        <input class="counter-input" name="water-cold-1" type="number" placeholder="Холодная вода 1">
+        <input class="counter-input" name="month" type="number" placeholder="Месяц" value="<?=$cs->getRequest('month')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water-cold-2" type="number" placeholder="Холодная вода 2">
+        <input class="counter-input" name="year" type="number" placeholder="Год" value="<?=$cs->getRequest('year')?>">
+    </label>
+
+
+    <div class="counter-form-divider"></div>
+
+
+    <label class="counter-label">
+        <input class="counter-input" name="water_cold_1" type="number" placeholder="Холодная вода 1" value="<?=$cs->getRequest('water-cold-1')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water-hot-1" type="number" placeholder="Горячая вода 1">
+        <input class="counter-input" name="water_cold_2" type="number" placeholder="Холодная вода 2" value="<?=$cs->getRequest('water-cold-2')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="water-hot-2" type="number" placeholder="Горячая вода 2">
+        <input class="counter-input" name="water_hot_1" type="number" placeholder="Горячая вода 1" value="<?=$cs->getRequest('water-hot-1')?>">
     </label>
 
     <label class="counter-label">
-        <input class="counter-input" name="electricity" type="number" placeholder="Электричество">
+        <input class="counter-input" name="water_hot_2" type="number" placeholder="Горячая вода 2" value="<?=$cs->getRequest('water-hot-2')?>">
+    </label>
+
+    <label class="counter-label">
+        <input class="counter-input" name="electricity" type="number" placeholder="Электричество" value="<?=$cs->getRequest('electricity')?>">
     </label>
 
 

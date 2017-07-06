@@ -1,21 +1,11 @@
 <?php
-
-$cs = new \Simplecov\CounterScore();
+global $cs;
 $request = $cs->getRequest();
-$errors = array();
+$cs->bug($request);
 
 if(is_array($request))
 {
-
+    $cs->dbDataWrite($request);
 }
 else
     $cs->pinError('Вы заполнили не все поля');
-
-if(count($cs->getErrors()) > 0)
-{
-
-}
-else
-{
-
-}

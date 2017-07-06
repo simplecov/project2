@@ -48,7 +48,7 @@ class CounterScore{
 
     /**
      * Выводит на экран переданную информацию
-     * @param $foo - array, int, string
+     * @param $foo - mixed
      */
     public function bug($foo)
     {
@@ -152,6 +152,7 @@ class CounterScore{
               water_hot_1 int NOT NULL,
               water_hot_2 int NOT NULL,
               electricity int NOT NULL,
+              personal int NOT NULL,
               UNIQUE KEY id (id)
             );";
 
@@ -163,23 +164,28 @@ class CounterScore{
     public function dbDataWrite($array)
     {
         global $wpdb;
-
-        if(is_array($array))
+        if (!is_array($array))
         {
-            $data = array();
-            foreach ($array as $key => $value)
-            {
-                $data[$key] = trim($value);
-            }
+            $this->bug('nifiga ne array');
+            return false;
+        }
 
-            if($wpdb->insert( $this->tableName, $data ))
-                return true;
-            else
-                return false;
+//        $data = array();
+//        foreach ($array as $key => $value)
+//        {
+//            $data[$key] = trim($value);
+//        }
 
+        if($wpdb->insert( $this->tableName, $array))
+        {
+            $this->bug('zapisal');
+            return true;
         }
         else
+        {
+            $this->bug('ne zapisal');
             return false;
+        }
     }
 
     public function dbDataPrepare($request)
@@ -189,4 +195,5 @@ class CounterScore{
 
 }
 
-new CounterScore();
+global $cs;
+$cs = new \Simplecov\CounterScore();
