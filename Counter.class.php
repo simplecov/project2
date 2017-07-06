@@ -20,6 +20,8 @@ class CounterScore{
          */
         $this->dbTableCreate();
         //register_activation_hook( __FILE__, array( '\Simplecov\CounterScore', 'createDBTable' ) );
+
+        $this->setRequest();
     }
 
     /**
@@ -67,12 +69,23 @@ class CounterScore{
     }
 
     /**
-     * Получаем данные запроса к серверу
+     * Записываем параметры запроса
      */
-    public function getRequest()
+    public function setRequest()
     {
         $this->request = $_REQUEST;
-        return $this->request;
+    }
+
+    /**
+     * Доступ к сапросу, записанному в поле класса
+     * @return array
+     */
+    public function getRequest($key = '')
+    {
+        if(strlen($key) > 0)
+            return $this->request[$key];
+        else
+            return $this->request;
     }
 
     /**
@@ -89,7 +102,7 @@ class CounterScore{
               id int NOT NULL AUTO_INCREMENT,
               firstname int NOT NULL,
               lastname int NOT NULL,
-              appartment int NOT NULL,
+              apartment int NOT NULL,
               month int NOT NULL,
               year int NOT NULL,
               water_cold_1 int NOT NULL,
@@ -105,7 +118,7 @@ class CounterScore{
         }
     }
 
-    public function dbWrite($array)
+    public function dbDataWrite($array)
     {
         global $wpdb;
 
@@ -117,11 +130,19 @@ class CounterScore{
                 $data[$key] = trim($value);
             }
 
-
+            if($wpdb->insert( $this->tableName, $data ))
+                return true;
+            else
+                return false;
 
         }
         else
             return false;
+    }
+
+    public function dbDataPrepare($request)
+    {
+        $this->bug($request);
     }
 
 }
