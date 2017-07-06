@@ -6,9 +6,14 @@ class CounterScore{
 
     private $pluginFolder;
 
+    /**
+     * @TODO убрать и работать с простым запросом
+     */
     private $request;
 
     private $tableName;
+
+    private $errors;
 
     public function __construct()
     {
@@ -69,6 +74,24 @@ class CounterScore{
     }
 
     /**
+     * Получает список ошибок
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Записывает ошибку в лог
+     * @param $text
+     */
+    public function pinError($text)
+    {
+        $this->errors[] = $text;
+    }
+
+    /**
      * Записываем параметры запроса
      */
     public function setRequest()
@@ -86,6 +109,25 @@ class CounterScore{
             return $this->request[$key];
         else
             return $this->request;
+    }
+
+    /**
+     *
+     * Записывает в запрос переданные параметры
+     * @param $data mixed
+     */
+    public function insertInRequest($data)
+    {
+        if(is_array($data) && count($data) > 0)
+        {
+            foreach ($data as $key => $value)
+            {
+                $this->request[$key] = $value;
+            }
+        }
+        else
+            $this->request[] = $data;
+
     }
 
     /**
