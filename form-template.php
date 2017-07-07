@@ -6,7 +6,7 @@ $cs->bug($cs->getMessages());
 $cs->bug($cs->getErrors());
 ?>
 
-<form id="counter-score-form" method="GET" action="" class="counter-score-form">
+<form id="counter-score-form" onsubmit="" method="GET" action="" class="counter-score-form">
 
     <label class="counter-label">
         <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequestValue('firstname')?>">

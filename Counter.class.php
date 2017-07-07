@@ -109,7 +109,7 @@ class CounterScore{
     public function pinError($text)
     {
         $this->errors[] = $text;
-        $this->renewRequest();
+        //$this->renewRequest();
     }
 
     /**

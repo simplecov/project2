@@ -19,6 +19,7 @@ function myplugin_activate() {
     ?>
     <div id="message" class="error">myplugin_activate</div>
     <?
+    exit;
 }
 register_activation_hook( 'counter-score', 'myplugin_activate' );
 register_activation_hook( 'counter-score', array( '\Simplecov\CounterScore', 'createDBTable' ) );

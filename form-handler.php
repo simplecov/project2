@@ -1,10 +1,15 @@
 <?php
-global $cs;
-$request = $cs->getRequest();
 
-if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
+function formHandler()
 {
-    $cs->dbDataWrite($request);
+    global $cs;
+    $request = $cs->getRequest();
+
+    if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
+    {
+        $cs->dbDataWrite($request);
+    }
+    else
+        $cs->pinError('Вы заполнили не все поля');
+
 }
-else
-    $cs->pinError('Вы заполнили не все поля');
