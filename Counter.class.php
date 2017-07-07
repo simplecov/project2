@@ -156,17 +156,17 @@ class CounterScore{
         {
             $sql = "CREATE TABLE " . $this->tableName . " (
               id INT NOT NULL AUTO_INCREMENT,
-              firstname CHAR NOT NULL,
-              lastname CHAR NOT NULL,
-              apartment TINYINT NOT NULL,
+              firstname TINYTEXT NOT NULL,
+              lastname TINYTEXT NOT NULL,
+              apartment INT NOT NULL,
               month TINYINT NOT NULL,
-              year YEAR NOT NULL,
-              water_cold_1 SMALLINT NOT NULL,
-              water_cold_2 SMALLINT NOT NULL,
-              water_hot_1 SMALLINT NOT NULL,
-              water_hot_2 SMALLINT NOT NULL,
-              electricity SMALLINT NOT NULL,
-              personal TINYINT NOT NULL,
+              year INT NOT NULL,
+              water_cold_1 INT NOT NULL,
+              water_cold_2 INT NOT NULL,
+              water_hot_1 INT NOT NULL,
+              water_hot_2 INT NOT NULL,
+              electricity INT NOT NULL,
+              personaldata TINYINT NOT NULL,
               UNIQUE KEY id (id)
             );";
 
@@ -182,7 +182,9 @@ class CounterScore{
         $processedData = $this->dbDataPrepare($data);
         $this->pinMessage($processedData);
 
-        if($wpdb->insert( $this->tableName, $processedData))
+        $demoData = ['firstname' => 'zazazaza', 'lastname' => 123];
+
+        if($wpdb->insert( $this->tableName, $data))
         {
             $this->pinMessage('zapisal');
             return true;
