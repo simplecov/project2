@@ -13,6 +13,7 @@ class CounterScore{
 
     private $tableName;
 
+    private $messages;
     private $errors;
 
     public function __construct()
@@ -32,7 +33,7 @@ class CounterScore{
     /**
      * Подключаем скрипты и стили
      */
-    public function registerStuff()
+    public static function registerStuff()
     {
         wp_enqueue_script('counter-score-js', plugins_url('/js/scripts.js', __FILE__), array('jquery'));
         wp_enqueue_style('counter-score-scss', plugins_url('/scss/style.scss', __FILE__), array());
@@ -58,19 +59,21 @@ class CounterScore{
     }
 
     /**
-     * Выводит сообщение в админку
-     * @param $message - string - текст сообщения для вывода в админке
-     * @param bool $error
+     * Получает список сообщений
+     * @return array
      */
-    public static function showMessage($message = 'asdasdasdasdas', $error = false)
+    public function getMessages()
     {
-        if(strlen($message) > 0)
-        {
-            if($error)
-                echo '<div id="message" class="error">' . $message . '</div>';
-            else
-                echo '<div id="message" class="updated fade">' . $message . '</div>';
-        }
+        return $this->messages;
+    }
+
+    /**
+     * Записывает сообщение в лог
+     * @param $text
+     */
+    public function pinMessage($text)
+    {
+        $this->messages[] = $text;
     }
 
     /**
@@ -103,12 +106,23 @@ class CounterScore{
      * Доступ к сапросу, записанному в поле класса
      * @return array
      */
-    public function getRequest($key = '')
+    public function getRequest()
     {
-        if(strlen($key) > 0)
+            return $this->request;
+    }
+
+    /**
+     * Возвращает значение массива по ключу, иначе - пустая строка
+     *
+     * @param string $key
+     * @return string
+     */
+    public function getRequestValue($key = '')
+    {
+        if(isset($this->request[$key]))
             return $this->request[$key];
         else
-            return $this->request;
+            return '';
     }
 
     /**
@@ -141,18 +155,18 @@ class CounterScore{
         if($wpdb->get_var("SHOW TABLES LIKE '$this->tableName'") != $this->tableName)
         {
             $sql = "CREATE TABLE " . $this->tableName . " (
-              id int NOT NULL AUTO_INCREMENT,
-              firstname varchar NOT NULL,
-              lastname varchar NOT NULL,
-              apartment int NOT NULL,
-              month int NOT NULL,
-              year int NOT NULL,
-              water_cold_1 int NOT NULL,
-              water_cold_2 int NOT NULL,
-              water_hot_1 int NOT NULL,
-              water_hot_2 int NOT NULL,
-              electricity int NOT NULL,
-              personal int NOT NULL,
+              id INT NOT NULL AUTO_INCREMENT,
+              firstname CHAR NOT NULL,
+              lastname CHAR NOT NULL,
+              apartment TINYINT NOT NULL,
+              month TINYINT NOT NULL,
+              year YEAR NOT NULL,
+              water_cold_1 SMALLINT NOT NULL,
+              water_cold_2 SMALLINT NOT NULL,
+              water_hot_1 SMALLINT NOT NULL,
+              water_hot_2 SMALLINT NOT NULL,
+              electricity SMALLINT NOT NULL,
+              personal TINYINT NOT NULL,
               UNIQUE KEY id (id)
             );";
 
@@ -161,36 +175,40 @@ class CounterScore{
         }
     }
 
-    public function dbDataWrite($array)
+    public function dbDataWrite($data)
     {
         global $wpdb;
-        if (!is_array($array))
-        {
-            $this->bug('nifiga ne array');
-            return false;
-        }
 
-//        $data = array();
-//        foreach ($array as $key => $value)
-//        {
-//            $data[$key] = trim($value);
-//        }
+        $processedData = $this->dbDataPrepare($data);
+        $this->pinMessage($processedData);
 
-        if($wpdb->insert( $this->tableName, $array))
+        if($wpdb->insert( $this->tableName, $processedData))
         {
-            $this->bug('zapisal');
+            $this->pinMessage('zapisal');
             return true;
         }
         else
         {
-            $this->bug('ne zapisal');
+            $this->pinMessage('ne zapisal');
             return false;
         }
     }
 
-    public function dbDataPrepare($request)
+    private function dbDataPrepare($data)
     {
-        $this->bug($request);
+        if (!is_array($data))
+        {
+            return false;
+        }
+
+        $processedData = [];
+        foreach($data as $key => $value)
+        {
+            $processedData[$key] = trim($value);
+        }
+
+        return $processedData;
+
     }
 
 }

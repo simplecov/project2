@@ -1,7 +1,7 @@
 <?php
 global $cs;
 $request = $cs->getRequest();
-$cs->bug($request);
+//$cs->bug($request);
 
 if(is_array($request))
 {
