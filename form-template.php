@@ -1,9 +1,6 @@
 <?
 global $cs;
-
-$cs->bug($cs->getRequest());
-$cs->bug($cs->getMessages());
-$cs->bug($cs->getErrors());
+$cs->bug($_REQUEST);
 ?>
 
 <?if($cs->getRequestValue('counter-score-form-success') == 'y'):?>
@@ -69,14 +66,20 @@ $cs->bug($cs->getErrors());
 
         <div class="counter-form-divider"></div>
 
+        <?if(count($cs->getErrors()) > 0):?>
+            <div class="result">
+                <?foreach($cs->getErrors() as $string):?>
+                    <p class="result-string"><?=$string?></p>
+                <?endforeach;?>
+            </div>
+
+            <div class="counter-form-divider"></div>
+        <?endif?>
+
         <input type="hidden" name="request_name" value="<?=$cs->getFormRequestName()?>">
 
         <label class="counter-label">
             <input class="count-button" type="submit" value="Отправить данные">
         </label>
-
-        <div class="result">
-
-        </div>
     </form>
 <?endif?>

@@ -236,11 +236,6 @@ class CounterScore{
                 return false;
             }
         }
-        else
-        {
-            $this->pinError('Вы заполнили не все поля');
-            return false;
-        }
     }
 
     /**
@@ -259,16 +254,64 @@ class CounterScore{
         $processedData = [];
         foreach($data as $key => $value)
         {
-            if(strlen($value) <= 0)
-                return false;
-
             if(!in_array($key, $this->tableCols))
                 continue;
+
+            if(!$this->isValidated($key, $value))
+                return false;
 
             $processedData[$key] = trim($value);
         }
         return $processedData;
 
+    }
+
+    private function isValidated($key, $value)
+    {
+        if(strlen($value) <= 0)
+        {
+            $this->pinError('Вы заполнили не все поля');
+            return false;
+        }
+
+        $result = true;
+        switch ($key)
+        {
+            case 'firstname':
+            case 'lastname':
+                if(strlen($value) > 255)
+                {
+                    $this->pinError('Введено более 255 символов.');
+                    $result = false;
+                }
+                break;
+
+            case 'month':
+                if($value > 12 && $value < 0)
+                {
+                    $this->pinError('Введено некорректное значение месяца.');
+                    $result = false;
+                }
+                break;
+
+            case 'personaldata':
+                if($value != 1)
+                {
+                    $this->pinError('Подтвердите согласие на обработку персональных данных.');
+                    $result = false;
+                }
+                break;
+
+            default:
+                if($value < 0 && $value > 2147483646)
+                {
+                    $this->pinError('Введены некорректные данные счетчиков');
+                    $result = false;
+                }
+                break;
+
+        }
+        return $result;
     }
 
     /**
