@@ -48,7 +48,6 @@ class CounterScore{
         $this->setServer();
         $this->setRequest();
         $this->setFormRequestName();
-        $this->createRedirectString();
     }
 
     /**
@@ -228,6 +227,7 @@ class CounterScore{
             if($wpdb->insert( $this->tableName, $processedData))
             {
                 $this->pinMessage('Информация успешно сохранена');
+                $this->createRedirectString();
                 return true;
             }
             else
@@ -298,7 +298,10 @@ class CounterScore{
         $server = $this->getServer();
 
         if(isset($server['HTTP_REFERER']))
+        {
             $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
+            $string .= '/?counter-score-form-success=y';
+        }
         else
             $string = false;
 
