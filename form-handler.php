@@ -1,9 +1,8 @@
 <?php
 global $cs;
 $request = $cs->getRequest();
-//$cs->bug($request);
 
-if(is_array($request))
+if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
 {
     $cs->dbDataWrite($request);
 }

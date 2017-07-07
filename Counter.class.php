@@ -12,9 +12,25 @@ class CounterScore{
     private $request;
 
     private $tableName;
+    private $tableCols = [
+        'id',
+        'firstname',
+        'lastname',
+        'apartment',
+        'month',
+        'year',
+        'water_cold_1',
+        'water_cold_2',
+        'water_hot_1',
+        'water_hot_2',
+        'electricity',
+        'personaldata',
+    ];
 
     private $messages;
     private $errors;
+
+    private $formRequestName;
 
     public function __construct()
     {
@@ -28,6 +44,7 @@ class CounterScore{
         //register_activation_hook( __FILE__, array( '\Simplecov\CounterScore', 'createDBTable' ) );
 
         $this->setRequest();
+        $this->setFormRequestName();
     }
 
     /**
@@ -92,6 +109,23 @@ class CounterScore{
     public function pinError($text)
     {
         $this->errors[] = $text;
+        $this->renewRequest();
+    }
+
+    /**
+     * Задает название запроса
+     */
+    public function setFormRequestName()
+    {
+        $this->formRequestName = 'counter_score_form_request';
+    }
+
+    /**
+     * Возвращает название запроса
+     */
+    public function getFormRequestName()
+    {
+        return $this->formRequestName;
     }
 
     /**
@@ -175,27 +209,46 @@ class CounterScore{
         }
     }
 
+    /**
+     * Записывает данные в таблицу
+     *
+     * @param $data array
+     * @return bool
+     */
     public function dbDataWrite($data)
     {
         global $wpdb;
 
         $processedData = $this->dbDataPrepare($data);
-        $this->pinMessage($processedData);
+        //$this->pinMessage($processedData);
 
-        $demoData = ['firstname' => 'zazazaza', 'lastname' => 123];
-
-        if($wpdb->insert( $this->tableName, $data))
+        //$demoData = ['firstname' => 'zazazaza', 'lastname' => 123];
+        if($processedData)
         {
-            $this->pinMessage('zapisal');
-            return true;
+            if($wpdb->insert( $this->tableName, $processedData))
+            {
+                $this->pinMessage('Информация успешно сохранена');
+                return true;
+            }
+            else
+            {
+                $this->pinError('Ошибка сохранения информации. Попробуйте, пожалуйста, позже. Или обратитесь к администратору сайта.');
+                return false;
+            }
         }
         else
         {
-            $this->pinMessage('ne zapisal');
+            $this->pinError('Вы заполнили не все поля, пробуй еще');
             return false;
         }
     }
 
+    /**
+     * Магическим образом обрабатывает информацию для последующей записи
+     *
+     * @param $data array
+     * @return array|bool
+     */
     private function dbDataPrepare($data)
     {
         if (!is_array($data))
@@ -206,11 +259,21 @@ class CounterScore{
         $processedData = [];
         foreach($data as $key => $value)
         {
+            if(strlen($value) <= 0)
+                return false;
+
+            if(!in_array($key, $this->tableCols))
+                continue;
+
             $processedData[$key] = trim($value);
         }
-
         return $processedData;
 
+    }
+
+    private function renewRequest()
+    {
+        unset($this->request['counter_score_form_request']);
     }
 
 }

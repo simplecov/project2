@@ -3,9 +3,10 @@ global $cs;
 
 $cs->bug($cs->getRequest());
 $cs->bug($cs->getMessages());
+$cs->bug($cs->getErrors());
 ?>
 
-<form id="counter-score-form" method="get" class="counter-score-form">
+<form id="counter-score-form" method="GET" action="" class="counter-score-form">
 
     <label class="counter-label">
         <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequestValue('firstname')?>">
@@ -61,9 +62,9 @@ $cs->bug($cs->getMessages());
 
     <input type="checkbox" name="personaldata" value="1"> Даю разрешение на обработку персональных данных
 
-
     <div class="counter-form-divider"></div>
 
+    <input type="hidden" name="request_name" value="<?=$cs->getFormRequestName()?>">
 
     <label class="counter-label">
         <input class="count-button" type="submit" value="Отправить данные">
