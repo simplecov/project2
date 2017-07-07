@@ -9,7 +9,9 @@ class CounterScore{
     /**
      * @TODO убрать и работать с простым запросом
      */
+    private $server;
     private $request;
+    private $redirect;
 
     private $tableName;
     private $tableCols = [
@@ -43,8 +45,10 @@ class CounterScore{
         $this->dbTableCreate();
         //register_activation_hook( __FILE__, array( '\Simplecov\CounterScore', 'createDBTable' ) );
 
+        $this->setServer();
         $this->setRequest();
         $this->setFormRequestName();
+        $this->createRedirectString();
     }
 
     /**
@@ -109,7 +113,6 @@ class CounterScore{
     public function pinError($text)
     {
         $this->errors[] = $text;
-        //$this->renewRequest();
     }
 
     /**
@@ -220,9 +223,6 @@ class CounterScore{
         global $wpdb;
 
         $processedData = $this->dbDataPrepare($data);
-        //$this->pinMessage($processedData);
-
-        //$demoData = ['firstname' => 'zazazaza', 'lastname' => 123];
         if($processedData)
         {
             if($wpdb->insert( $this->tableName, $processedData))
@@ -238,7 +238,7 @@ class CounterScore{
         }
         else
         {
-            $this->pinError('Вы заполнили не все поля, пробуй еще');
+            $this->pinError('Вы заполнили не все поля');
             return false;
         }
     }
@@ -271,9 +271,47 @@ class CounterScore{
 
     }
 
-    private function renewRequest()
+    /**
+     * Записывает данные сервера
+     * @return array
+     */
+    private function setServer()
     {
-        unset($this->request['counter_score_form_request']);
+        $this->server = $_SERVER;
+    }
+
+    /**
+     * Получает данные сервера
+     * @return array
+     */
+    private function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
+     * Создает ссылку для перехода. Записывает в поле.
+     *
+     */
+    private function createRedirectString()
+    {
+        $server = $this->getServer();
+
+        if(isset($server['HTTP_REFERER']))
+            $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
+        else
+            $string = false;
+
+        $this->redirect = $string;
+    }
+
+    /**
+     * Возвращает сформированную строку редиректа
+     * @return string
+     */
+    public function getRedirectString()
+    {
+        return $this->redirect;
     }
 
 }

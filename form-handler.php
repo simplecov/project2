@@ -1,15 +1,14 @@
 <?php
 
-function formHandler()
+global $cs;
+$request = $cs->getRequest();
+
+if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
 {
-    global $cs;
-    $request = $cs->getRequest();
-
-    if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
+    if($cs->dbDataWrite($request))
     {
-        $cs->dbDataWrite($request);
+        $redirect = $cs->getRedirectString();
+        header("Location: $redirect");
+        exit;
     }
-    else
-        $cs->pinError('Вы заполнили не все поля');
-
 }
