@@ -11,7 +11,9 @@ class CounterScore{
      */
     private $server;
     private $request;
+
     private $redirect;
+    private $redirectAlt;
 
     private $tableName;
     private $tableCols = [
@@ -227,7 +229,7 @@ class CounterScore{
             if($wpdb->insert( $this->tableName, $processedData))
             {
                 $this->pinMessage('Информация успешно сохранена');
-                $this->createRedirectString();
+                //$this->createRedirectString();
                 return true;
             }
             else
@@ -335,14 +337,19 @@ class CounterScore{
      * Создает ссылку для перехода. Записывает в поле.
      *
      */
-    private function createRedirectString()
+    private function createRedirectString($switch = true)
     {
         $server = $this->getServer();
 
         if(isset($server['HTTP_REFERER']))
         {
-            $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
-            $string .= '/?counter-score-form-success=y';
+            if($switch)
+            {
+                $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
+                $string .= '/?counter-score-form-success=y';
+            }
+            else
+                $string = $server['HTTP_REFERER'];
         }
         else
             $string = false;
@@ -354,9 +361,14 @@ class CounterScore{
      * Возвращает сформированную строку редиректа
      * @return string
      */
-    public function getRedirectString()
+    public function getRedirectString($switch = true)
     {
-        return $this->redirect;
+        $this->createRedirectString($switch);
+
+        if($switch)
+            return $this->redirect;
+        else
+            return $this->redirectAlt;
     }
 
 }
