@@ -11,4 +11,10 @@ if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
         header("Location: $redirect");
         exit;
     }
+    else
+    {
+        /**
+         * @TODO Сделать обратный редирект на окно ошибки
+         */
+    }
 }

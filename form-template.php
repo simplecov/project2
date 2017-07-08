@@ -10,6 +10,10 @@ $cs->bug($_REQUEST);
 <?else:?>
     <form id="counter-score-form" method="GET" action="" class="counter-score-form">
 
+        <input type="checkbox" name="personaldata" value="1"> Даю разрешение на обработку персональных данных
+
+        <div class="counter-form-divider"></div>
+
         <label class="counter-label">
             <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequestValue('firstname')?>">
         </label>
@@ -57,12 +61,6 @@ $cs->bug($_REQUEST);
         <label class="counter-label">
             <input class="counter-input" name="electricity" type="number" placeholder="Электричество" value="<?=$cs->getRequestValue('electricity')?>">
         </label>
-
-
-        <div class="counter-form-divider"></div>
-
-
-        <input type="checkbox" name="personaldata" value="1"> Даю разрешение на обработку персональных данных
 
         <div class="counter-form-divider"></div>
 

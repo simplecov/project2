@@ -251,6 +251,13 @@ class CounterScore{
             return false;
         }
 
+        $arrayKeys = array_keys($data);
+        if(!in_array('personaldata', $arrayKeys))
+        {
+            $this->pinError('Вы не дали согласие на обработку персональных данных');
+            return false;
+        }
+
         $processedData = [];
         foreach($data as $key => $value)
         {
@@ -268,12 +275,6 @@ class CounterScore{
 
     private function isValidated($key, $value)
     {
-        if(strlen($value) <= 0)
-        {
-            $this->pinError('Вы заполнили не все поля');
-            return false;
-        }
-
         $result = true;
         switch ($key)
         {
@@ -287,25 +288,19 @@ class CounterScore{
                 break;
 
             case 'month':
-                if($value > 12 && $value < 0)
+
+                if((int)$value > 12 && (int)$value < 0)
                 {
                     $this->pinError('Введено некорректное значение месяца.');
                     $result = false;
                 }
                 break;
 
-            case 'personaldata':
-                if($value != 1)
-                {
-                    $this->pinError('Подтвердите согласие на обработку персональных данных.');
-                    $result = false;
-                }
-                break;
-
             default:
-                if($value < 0 && $value > 2147483646)
+
+                if((int)$value < 0)
                 {
-                    $this->pinError('Введены некорректные данные счетчиков');
+                    $this->pinError('Параметр счетчика задан некорректно');
                     $result = false;
                 }
                 break;

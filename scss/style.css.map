@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,mBAAoB;EAClB,UAAU,EAAE,IAAc",
-"sources": ["counter-form-style.scss"],
+"mappings": "AAAA,mBAAoB;EAClB,UAAU,EAAE,KAAK",
+"sources": ["style.scss"],
 "names": [],
-"file": "counter-form-style.css"
+"file": "style.css"
 }
