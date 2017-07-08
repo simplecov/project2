@@ -158,7 +158,7 @@ class CounterScore{
         if(isset($this->request[$key]))
             return $this->request[$key];
         else
-            return '';
+            return false;
     }
 
     /**
@@ -285,11 +285,15 @@ class CounterScore{
                     $this->pinError('Введено более 255 символов.');
                     $result = false;
                 }
+                else if(strlen($value) <= 0)
+                {
+                    $this->pinError('Вы не заполнили информацию о имени и фамилии.');
+                    $result = false;
+                }
                 break;
 
             case 'month':
-
-                if((int)$value > 12 && (int)$value < 0)
+                if((int)$value > 12 || (int)$value < 0)
                 {
                     $this->pinError('Введено некорректное значение месяца.');
                     $result = false;
@@ -300,7 +304,7 @@ class CounterScore{
 
                 if((int)$value < 0)
                 {
-                    $this->pinError('Параметр счетчика задан некорректно');
+                    $this->pinError('Вы ввели некорректные данные счетчиков.');
                     $result = false;
                 }
                 break;

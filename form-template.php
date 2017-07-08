@@ -10,7 +10,9 @@ $cs->bug($_REQUEST);
 <?else:?>
     <form id="counter-score-form" method="GET" action="" class="counter-score-form">
 
-        <input type="checkbox" name="personaldata" value="1"> Даю разрешение на обработку персональных данных
+        <label for="#personaldata">
+            <input id="personaldata" type="checkbox" name="personaldata" value="1" <?if($cs->getRequestValue('personaldata')):?>checked<?endif?>> Даю разрешение на обработку персональных данных
+        </label>
 
         <div class="counter-form-divider"></div>
 
