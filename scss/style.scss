@@ -1,3 +1,80 @@
 .counter-score-form {
+  position: relative;
   background: white;
+  padding: 15px 10px;
+  width: 100%;
+
+  .counter-label{
+    float: left;
+    display: inline-block;
+    margin: 0 0 15px 0;
+
+    &.personaldata{
+      padding: 0 15px;
+    }
+
+    &.full{
+      width: 100%;
+      float: left;
+    }
+
+    &.half{
+      width: 50%;
+      @media (max-width: 991px)
+      {
+        width: 100%;
+      }
+    }
+    &.fourth{
+      width: 25%;
+      @media (max-width: 991px)
+      {
+        width: 100%;
+      }
+    }
+
+    .counter-input{
+      border: 1px solid rgba(255, 255, 255, 0.01);
+      font-size: 20px;
+
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -ms-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+
+      &:active, &:focus{
+        border: 1px solid;
+      }
+    }
+  }
+
+  .counter-form-divider{
+    width: 100%;
+    float: left;
+  }
+
+  .result{
+    position: relative;
+    float: left;
+    width: 100%;
+    background: rgb(255, 225, 0);;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+
+    p{
+      font-size: 20px;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.72);
+    }
+  }
+
+  .clearfix:after{
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+  }
 }

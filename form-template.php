@@ -1,70 +1,74 @@
 <?
 global $cs;
-$cs->bug($_REQUEST);
+//$cs->bug($_REQUEST);
 ?>
+
+<h2>Передайте данные счетчиков</h2>
 
 <?if($cs->getRequestValue('counter-score-form-success') == 'y'):?>
     <div class="counter-score-form-success">
         Данные успешно сохранены
     </div>
 <?else:?>
-    <form id="counter-score-form" method="GET" action="" class="counter-score-form">
+    <form id="counter-score-form" method="GET" action="form-template.php" class="counter-score-form">
 
-        <label for="#personaldata">
-            <input id="personaldata" type="checkbox" name="personaldata" value="1" <?if($cs->getRequestValue('personaldata')):?>checked<?endif?>> Даю разрешение на обработку персональных данных
-        </label>
+        <hr class="counter-form-divider">
 
-        <div class="counter-form-divider"></div>
+        <h3>Персональные данные</h3>
 
-        <label class="counter-label">
+        <label class="counter-label half">
             <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequestValue('firstname')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label half">
             <input class="counter-input" name="lastname" type="text" placeholder="Ваша фамилия" value="<?=$cs->getRequestValue('lastname')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label full">
             <input class="counter-input" name="apartment" type="number" placeholder="Номер квартиры" value="<?=$cs->getRequestValue('apartment')?>">
         </label>
 
+        <label for="#personaldata" class="counter-label personaldata">
+            <input id="personaldata" type="checkbox" name="personaldata" value="1" <?if($cs->getRequestValue('personaldata')):?>checked<?endif?>> Даю разрешение на обработку персональных данных
+        </label>
 
-        <div class="counter-form-divider"></div>
 
+        <hr class="counter-form-divider">
 
-        <label class="counter-label">
+        <h3>Дата</h3>
+
+        <label class="counter-label half">
             <input class="counter-input" name="month" type="number" placeholder="Месяц" value="<?=$cs->getRequestValue('month')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label half">
             <input class="counter-input" name="year" type="number" placeholder="Год" value="<?=$cs->getRequestValue('year')?>">
         </label>
 
 
-        <div class="counter-form-divider"></div>
+        <hr class="counter-form-divider">
 
+        <h3>Данные счетчиков</h3>
 
-        <label class="counter-label">
+        <label class="counter-label fourth">
             <input class="counter-input" name="water_cold_1" type="number" placeholder="Холодная вода 1" value="<?=$cs->getRequestValue('water_cold_1')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label fourth">
             <input class="counter-input" name="water_cold_2" type="number" placeholder="Холодная вода 2" value="<?=$cs->getRequestValue('water_cold_2')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label fourth">
             <input class="counter-input" name="water_hot_1" type="number" placeholder="Горячая вода 1" value="<?=$cs->getRequestValue('water_hot_1')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label fourth">
             <input class="counter-input" name="water_hot_2" type="number" placeholder="Горячая вода 2" value="<?=$cs->getRequestValue('water_hot_2')?>">
         </label>
 
-        <label class="counter-label">
+        <label class="counter-label fourth">
             <input class="counter-input" name="electricity" type="number" placeholder="Электричество" value="<?=$cs->getRequestValue('electricity')?>">
         </label>
-
-        <div class="counter-form-divider"></div>
 
         <?if(count($cs->getErrors()) > 0):?>
             <div class="result">
@@ -72,14 +76,14 @@ $cs->bug($_REQUEST);
                     <p class="result-string"><?=$string?></p>
                 <?endforeach;?>
             </div>
-
-            <div class="counter-form-divider"></div>
         <?endif?>
 
         <input type="hidden" name="request_name" value="<?=$cs->getFormRequestName()?>">
 
-        <label class="counter-label">
+        <label class="counter-label full">
             <input class="count-button" type="submit" value="Отправить данные">
         </label>
+
+        <div class="clearfix"></div>
     </form>
 <?endif?>

@@ -58,7 +58,7 @@ class CounterScore{
     public static function registerStuff()
     {
         wp_enqueue_script('counter-score-js', plugins_url('/js/scripts.js', __FILE__), array('jquery'));
-        wp_enqueue_style('counter-score-scss', plugins_url('/scss/style.scss', __FILE__), array());
+        wp_enqueue_style('counter-score-css', plugins_url('/scss/style.css', __FILE__), array());
     }
 
     /**

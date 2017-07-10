@@ -1,4 +1,57 @@
 .counter-score-form {
-  background: white; }
+  position: relative;
+  background: white;
+  padding: 15px 10px;
+  width: 100%; }
+  .counter-score-form .counter-label {
+    float: left;
+    display: inline-block;
+    margin: 0 0 15px 0; }
+    .counter-score-form .counter-label.personaldata {
+      padding: 0 15px; }
+    .counter-score-form .counter-label.full {
+      width: 100%;
+      float: left; }
+    .counter-score-form .counter-label.half {
+      width: 50%; }
+      @media (max-width: 991px) {
+        .counter-score-form .counter-label.half {
+          width: 100%; } }
+    .counter-score-form .counter-label.fourth {
+      width: 25%; }
+      @media (max-width: 991px) {
+        .counter-score-form .counter-label.fourth {
+          width: 100%; } }
+    .counter-score-form .counter-label .counter-input {
+      border: 1px solid rgba(255, 255, 255, 0.01);
+      font-size: 20px;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -ms-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s; }
+      .counter-score-form .counter-label .counter-input:active, .counter-score-form .counter-label .counter-input:focus {
+        border: 1px solid; }
+  .counter-score-form .counter-form-divider {
+    width: 100%;
+    float: left; }
+  .counter-score-form .result {
+    position: relative;
+    float: left;
+    width: 100%;
+    background: #ffe100;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px; }
+    .counter-score-form .result p {
+      font-size: 20px;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.72); }
+  .counter-score-form .clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
 
 /*# sourceMappingURL=style.css.map */
