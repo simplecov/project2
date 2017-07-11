@@ -2,7 +2,6 @@
 global $cs;
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
-    $cs->bug('Это лезет из шаблона');
     $cs->bug($cs->getRequest());
     $cs->bug($cs->getRedirectString());
     $cs->bug($cs->getRedirectString(false));

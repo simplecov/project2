@@ -13,7 +13,7 @@ class CounterScore{
     private $request;
 
     private $redirect;
-    private $redirectAlt;
+    private $referer;
 
     private $tableName;
     private $tableCols = [
@@ -50,6 +50,7 @@ class CounterScore{
         $this->setServer();
         $this->setRequest();
         $this->setFormRequestName();
+        $this->setReferer();
     }
 
     /**
@@ -361,6 +362,7 @@ class CounterScore{
                     $this->pinMessage(gettype($value));
                     $this->pinMessage($value);
                 }
+                break;
 
         }
 
@@ -383,10 +385,21 @@ class CounterScore{
      * Получает данные сервера
      * @return array
      */
-    public function getServer()
+    private function getServer()
     {
         return $this->server;
     }
+
+    /**
+     * Устанавливает значение HTTP_REFERER
+     */
+    private function setReferer()
+    {
+        $this->referer = $this->getServer()['HTTP_REFERER'];
+        echo $this->referer;
+        exit;
+    }
+
 
     /**
      * Создает ссылку для перехода. Записывает в поле $this->redirect.
