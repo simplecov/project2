@@ -229,7 +229,6 @@ class CounterScore{
             if($wpdb->insert( $this->tableName, $processedData))
             {
                 $this->pinMessage('Информация успешно сохранена');
-                //$this->createRedirectString();
                 return true;
             }
             else
@@ -272,7 +271,6 @@ class CounterScore{
             $processedData[$key] = trim($value);
         }
         return $processedData;
-
     }
 
     private function isValidated($key, $value)
@@ -284,12 +282,10 @@ class CounterScore{
                 if(strlen($value) > 255)
                 {
                     $this->pinError('Введено более 255 символов в поле "Имя".');
-                    $result = false;
                 }
                 else if(strlen($value) <= 0)
                 {
                     $this->pinError('Вы не заполнили информацию о имени.');
-                    $result = false;
                 }
                 else
                 {
@@ -300,12 +296,11 @@ class CounterScore{
                 if(strlen($value) > 255)
                 {
                     $this->pinError('Введено более 255 символов в поле "Фамилия".');
-                    $result = false;
+
                 }
                 else if(strlen($value) <= 0)
                 {
                     $this->pinError('Вы не заполнили информацию о фамилии.');
-                    $result = false;
                 }
                 else
                 {
@@ -317,7 +312,6 @@ class CounterScore{
                 if((int)$value <= 0)
                 {
                     $this->pinError('Вы не указали номер квартиры');
-                    $result = false;
                 }
                 else
                 {
@@ -329,12 +323,10 @@ class CounterScore{
                 if((int)$value > 12)
                 {
                     $this->pinError('Введено некорректное значение месяца.');
-                    $result = false;
                 }
                 else if((int)$value <= 0)
                 {
                     $this->pinError('Введено некорректное значение месяца.');
-                    $result = false;
                 }
                 else
                 {
@@ -346,12 +338,10 @@ class CounterScore{
                 if((int)$value > 9999)
                 {
                     $this->pinError('Введено некорректное значение года.');
-                    $result = false;
                 }
-                else if((int)$value <= 206)
+                else if((int)$value <= 2016)
                 {
                     $this->pinError('Введено некорректное значение года.');
-                    $result = false;
                 }
                 else
                 {
@@ -360,19 +350,23 @@ class CounterScore{
                 break;
 
             default:
-                if((int)$value < 0)
+                if(strlen($value ) < 0)
                 {
-                    $this->pinError('Введено некорректное значение года.');
-                    $result = false;
+                    $this->pinError(gettype($value));
+                    $this->pinError($value);
+                    $this->pinError('Введено некорректное значение счетчиков.');
                 }
                 else
                 {
                     $this->pinMessage(gettype($value));
                     $this->pinMessage($value);
-                    $result = false;
                 }
 
         }
+
+        if(count($this->getErrors()))
+            $result = false;
+
         return $result;
     }
 
@@ -389,31 +383,30 @@ class CounterScore{
      * Получает данные сервера
      * @return array
      */
-    private function getServer()
+    public function getServer()
     {
         return $this->server;
     }
 
     /**
-     * Создает ссылку для перехода. Записывает в поле.
+     * Создает ссылку для перехода. Записывает в поле $this->redirect.
      *
      */
     private function createRedirectString($switch = true)
     {
         $server = $this->getServer();
-
         if(isset($server['HTTP_REFERER']))
         {
             if($switch)
             {
                 $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
-                $string .= '/?counter-score-form-success=y';
+                $string .= '?counter-score-form-success=y';
             }
             else
                 $string = $server['HTTP_REFERER'];
         }
         else
-            $string = false;
+            $string = $server['REQUEST_SCHEME'] . '://' . $server['SERVER_NAME'];
 
         $this->redirect = $string;
     }
@@ -426,10 +419,7 @@ class CounterScore{
     {
         $this->createRedirectString($switch);
 
-        if($switch)
-            return $this->redirect;
-        else
-            return $this->redirectAlt;
+        return $this->redirect;
     }
 
 }
