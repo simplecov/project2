@@ -39,10 +39,13 @@
     position: relative;
     float: left;
     width: 100%;
-    background: #ffe100;
     color: white;
     padding: 15px;
     margin-bottom: 15px; }
+    .counter-score-form .result.success {
+      background: #93f73e; }
+    .counter-score-form .result.error {
+      background: #ffe100; }
     .counter-score-form .result p {
       font-size: 20px;
       margin: 0;

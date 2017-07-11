@@ -1,6 +1,6 @@
 <?
 global $cs;
-//$cs->bug($_REQUEST);
+$cs->bug($cs->getRequest());
 ?>
 
 <h2>Передайте данные счетчиков</h2>
@@ -10,7 +10,7 @@ global $cs;
         Данные успешно сохранены
     </div>
 <?else:?>
-    <form id="counter-score-form" method="GET" action="form-template.php" class="counter-score-form">
+    <form id="counter-score-form" method="GET" action="" class="counter-score-form">
 
         <hr class="counter-form-divider">
 
@@ -70,8 +70,16 @@ global $cs;
             <input class="counter-input" name="electricity" type="number" placeholder="Электричество" value="<?=$cs->getRequestValue('electricity')?>">
         </label>
 
+        <?if(count($cs->getMessages()) > 0):?>
+            <div class="result success">
+                <?foreach($cs->getMessages() as $string):?>
+                    <p class="result-string"><?=$string?></p>
+                <?endforeach;?>
+            </div>
+        <?endif?>
+
         <?if(count($cs->getErrors()) > 0):?>
-            <div class="result">
+            <div class="result error">
                 <?foreach($cs->getErrors() as $string):?>
                     <p class="result-string"><?=$string?></p>
                 <?endforeach;?>

@@ -58,10 +58,17 @@
     position: relative;
     float: left;
     width: 100%;
-    background: rgb(255, 225, 0);;
     color: white;
     padding: 15px;
     margin-bottom: 15px;
+
+    &.success{
+      background: #93f73e;
+    }
+
+    &.error{
+      background: rgb(255, 225, 0);
+    }
 
     p{
       font-size: 20px;

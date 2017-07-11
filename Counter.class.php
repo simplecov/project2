@@ -281,35 +281,96 @@ class CounterScore{
         switch ($key)
         {
             case 'firstname':
-            case 'lastname':
                 if(strlen($value) > 255)
                 {
-                    $this->pinError('Введено более 255 символов.');
+                    $this->pinError('Введено более 255 символов в поле "Имя".');
                     $result = false;
                 }
                 else if(strlen($value) <= 0)
                 {
-                    $this->pinError('Вы не заполнили информацию о имени и фамилии.');
+                    $this->pinError('Вы не заполнили информацию о имени.');
                     $result = false;
+                }
+                else
+                {
+                    $this->pinMessage('Имя заполнено');
+                }
+                break;
+            case 'lastname':
+                if(strlen($value) > 255)
+                {
+                    $this->pinError('Введено более 255 символов в поле "Фамилия".');
+                    $result = false;
+                }
+                else if(strlen($value) <= 0)
+                {
+                    $this->pinError('Вы не заполнили информацию о фамилии.');
+                    $result = false;
+                }
+                else
+                {
+                    $this->pinMessage('Фамилия заполнена');
+                }
+                break;
+
+            case 'apartment':
+                if((int)$value <= 0)
+                {
+                    $this->pinError('Вы не указали номер квартиры');
+                    $result = false;
+                }
+                else
+                {
+                    $this->pinMessage('Квартира указана');
                 }
                 break;
 
             case 'month':
-                if((int)$value > 12 || (int)$value < 0)
+                if((int)$value > 12)
                 {
                     $this->pinError('Введено некорректное значение месяца.');
                     $result = false;
                 }
+                else if((int)$value <= 0)
+                {
+                    $this->pinError('Введено некорректное значение месяца.');
+                    $result = false;
+                }
+                else
+                {
+                    $this->pinMessage('Месяц правильный');
+                }
+                break;
+
+            case 'year':
+                if((int)$value > 9999)
+                {
+                    $this->pinError('Введено некорректное значение года.');
+                    $result = false;
+                }
+                else if((int)$value <= 206)
+                {
+                    $this->pinError('Введено некорректное значение года.');
+                    $result = false;
+                }
+                else
+                {
+                    $this->pinMessage('Год указан верно');
+                }
                 break;
 
             default:
-
                 if((int)$value < 0)
                 {
-                    $this->pinError('Вы ввели некорректные данные счетчиков.');
+                    $this->pinError('Введено некорректное значение года.');
                     $result = false;
                 }
-                break;
+                else
+                {
+                    $this->pinMessage(gettype($value));
+                    $this->pinMessage($value);
+                    $result = false;
+                }
 
         }
         return $result;
