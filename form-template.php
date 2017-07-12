@@ -11,8 +11,6 @@ if(COUNTER_FORM_ERROR_ACTIVE)
 }
 ?>
 
-<h2>Передайте данные счетчиков</h2>
-
 <?if($cs->getRequestValue($cs->getFormRequestName()) == 'y'):?>
     <div class="counter-score-form-success">
         Данные успешно сохранены.

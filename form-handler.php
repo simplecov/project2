@@ -7,10 +7,6 @@ if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
 //        $redirect = $cs->getRedirectString();
 //        header("Location: $redirect");
 //        exit;
-        //$_REQUEST[$cs->getFormRequestName()] = 'y';
-//        unset($_GET);
-//        $_GET[$cs->getFormRequestName()] = 'y';
-//        $cs->bug($_GET);
         $cs->setRequest([$cs->getFormRequestName() => 'y']);
     }
 //    else

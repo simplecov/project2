@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Counter Score
  * Plugin URI:
- * Description: Counter score.
+ * Description: Counter score form and filter. Shortcode: [counter-score-form]
  * Version: 1.0.0
  * Author: Alexey Abrosimov
  * Author URI:
@@ -12,8 +12,9 @@
  * License: GPL-2.0+
  */
 include 'Counter.class.php';
-//include 'form-handler.php';
+
 global $cs;
+//include 'form-handler.php';
 add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTemplate' ));
 
 
