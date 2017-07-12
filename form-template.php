@@ -1,4 +1,5 @@
 <?
+include 'form-handler.php';
 global $cs;
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
@@ -12,12 +13,12 @@ if(COUNTER_FORM_ERROR_ACTIVE)
 
 <h2>Передайте данные счетчиков</h2>
 
-<?if($cs->getRequestValue('counter-score-form-success') == 'y'):?>
+<?if($cs->getRequestValue($cs->getFormRequestName()) == 'y'):?>
     <div class="counter-score-form-success">
         Данные успешно сохранены.
     </div>
 <?else:?>
-    <form id="counter-score-form" method="GET" action="form-handler.php" class="counter-score-form">
+    <form id="counter-score-form" method="GET" action="" class="counter-score-form">
 
         <hr class="counter-form-divider">
 

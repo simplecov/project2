@@ -401,7 +401,7 @@ class CounterScore{
             if($switch)
             {
                 $string = preg_replace('/\?.+/', '',  $server['HTTP_REFERER']);
-                $string .= '?counter-score-form-success=y';
+                $string .= '?' . $this->getFormRequestName() . '=y';
             }
             else
             {

@@ -19,4 +19,4 @@ add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTempla
 /**
  * Debug activation
  */
-define('COUNTER_FORM_ERROR_ACTIVE', true);
+define('COUNTER_FORM_ERROR_ACTIVE', false);
