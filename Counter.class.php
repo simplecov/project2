@@ -134,10 +134,14 @@ class CounterScore{
 
     /**
      * Записываем параметры запроса
+     * @param mixed $data
      */
-    public function setRequest()
+    public function setRequest($data = false)
     {
-        $this->request = $_REQUEST;
+        if($data)
+            $this->request = $data;
+        else
+            $this->request = $_REQUEST;
     }
 
     /**
@@ -248,9 +252,7 @@ class CounterScore{
     private function dbDataPrepare($data)
     {
         if (!is_array($data))
-        {
             return false;
-        }
 
         $arrayKeys = array_keys($data);
         if(!in_array('personaldata', $arrayKeys))
@@ -268,7 +270,7 @@ class CounterScore{
             if(!$this->isValidated($key, $value))
                 return false;
 
-            $processedData[$key] = trim($value);
+            $processedData[$key] = $value;
         }
         return $processedData;
     }
@@ -417,9 +419,9 @@ class CounterScore{
             }
             else
             {
-                $pattern = '/(&|\?)request_name=' . $this->getFormRequestName() . '/';
-                $query = preg_replace($pattern, '',  $server['QUERY_STRING']);
-                $string = $server['HTTP_REFERER'] . '?' . $query;
+//                $pattern = '/(&|\?)request_name=' . $this->getFormRequestName() . '/';
+//                $query = preg_replace($pattern, '',  $server['QUERY_STRING']);
+                $string = $server['HTTP_REFERER'] . '?' . $server['QUERY_STRING'];
             }
         }
         else

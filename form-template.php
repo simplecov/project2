@@ -1,5 +1,6 @@
 <?
 global $cs;
+include 'form-handler.php';
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
     $cs->bug($cs->getRequest());
@@ -8,7 +9,6 @@ if(COUNTER_FORM_ERROR_ACTIVE)
     $cs->bug($cs->getServer());
     //exit;
 }
-include 'form-handler.php';
 ?>
 
 <h2>Передайте данные счетчиков</h2>
