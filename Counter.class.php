@@ -50,7 +50,6 @@ class CounterScore{
         $this->setServer();
         $this->setRequest();
         $this->setFormRequestName();
-        $this->setReferer();
     }
 
     /**
@@ -391,21 +390,6 @@ class CounterScore{
     }
 
     /**
-     * Устанавливает значение HTTP_REFERER
-     */
-    private function setReferer()
-    {
-        $server = $this->getServer();
-        if(isset($server['HTTP_REFERER']))
-            $this->referer = $server['HTTP_REFERER'];
-        else
-            $this->referer = $server['HTTP_REFERER'];
-        //echo $this->referer;
-        //exit;
-    }
-
-
-    /**
      * Создает ссылку для перехода. Записывает в поле $this->redirect.
      *
      */
@@ -420,10 +404,15 @@ class CounterScore{
                 $string .= '?counter-score-form-success=y';
             }
             else
-                $string = $server['HTTP_REFERER'];
+            {
+                $pattern = '/(&|\?)request_name=' . $this->getFormRequestName() . '/';
+                $query = preg_replace($pattern, '',  $server['QUERY_STRING']);
+                $string = $server['HTTP_REFERER'] . '?' . $query;
+            }
         }
         else
-            $string = $server['REQUEST_SCHEME'] . '://' . $server['SERVER_NAME'];
+            return false;
+            //$string = $server['REQUEST_SCHEME'] . '://' . $server['SERVER_NAME'];
 
         $this->redirect = $string;
     }

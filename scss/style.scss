@@ -85,3 +85,15 @@
       visibility: hidden;
   }
 }
+
+.counter-score-form-success{
+  background: #93f73e;
+  padding: 15px;
+  font-size: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+
+  .success-image{
+    height: 30px;
+  }
+}

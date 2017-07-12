@@ -6,6 +6,7 @@ if(COUNTER_FORM_ERROR_ACTIVE)
     $cs->bug($cs->getRedirectString());
     $cs->bug($cs->getRedirectString(false));
     $cs->bug($cs->getServer());
+    //exit;
 }
 ?>
 
@@ -13,7 +14,7 @@ if(COUNTER_FORM_ERROR_ACTIVE)
 
 <?if($cs->getRequestValue('counter-score-form-success') == 'y'):?>
     <div class="counter-score-form-success">
-        Данные успешно сохранены
+        Данные успешно сохранены.
     </div>
 <?else:?>
     <form id="counter-score-form" method="GET" action="form-handler.php" class="counter-score-form">

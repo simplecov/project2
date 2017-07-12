@@ -57,4 +57,13 @@
     clear: both;
     visibility: hidden; }
 
+.counter-score-form-success {
+  background: #93f73e;
+  padding: 15px;
+  font-size: 30px;
+  margin-bottom: 15px;
+  text-align: center; }
+  .counter-score-form-success .success-image {
+    height: 30px; }
+
 /*# sourceMappingURL=style.css.map */
