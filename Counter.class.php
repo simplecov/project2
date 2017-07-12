@@ -255,7 +255,7 @@ class CounterScore{
         $arrayKeys = array_keys($data);
         if(!in_array('personaldata', $arrayKeys))
         {
-            $this->pinError('Вы не дали согласие на обработку персональных данных');
+            $this->pinError('Вы не дали согласие на обработку персональных данных.');
             return false;
         }
 
@@ -280,89 +280,100 @@ class CounterScore{
         {
             case 'firstname':
                 if(strlen($value) > 255)
-                {
                     $this->pinError('Введено более 255 символов в поле "Имя".');
-                }
                 else if(strlen($value) <= 0)
-                {
                     $this->pinError('Вы не заполнили информацию о имени.');
-                }
                 else
-                {
                     $this->pinMessage('Имя заполнено');
-                }
                 break;
+
+
             case 'lastname':
                 if(strlen($value) > 255)
-                {
                     $this->pinError('Введено более 255 символов в поле "Фамилия".');
-
-                }
                 else if(strlen($value) <= 0)
-                {
                     $this->pinError('Вы не заполнили информацию о фамилии.');
-                }
                 else
-                {
                     $this->pinMessage('Фамилия заполнена');
-                }
                 break;
+
 
             case 'apartment':
                 if((int)$value <= 0)
-                {
                     $this->pinError('Вы не указали номер квартиры');
-                }
                 else
-                {
                     $this->pinMessage('Квартира указана');
-                }
                 break;
+
 
             case 'month':
                 if((int)$value > 12)
-                {
                     $this->pinError('Введено некорректное значение месяца.');
-                }
                 else if((int)$value <= 0)
-                {
                     $this->pinError('Введено некорректное значение месяца.');
-                }
                 else
-                {
-                    $this->pinMessage('Месяц правильный');
-                }
+                    $this->pinMessage('Месяц указан');
                 break;
+
 
             case 'year':
                 if((int)$value > 9999)
-                {
                     $this->pinError('Введено некорректное значение года.');
-                }
                 else if((int)$value <= 2016)
-                {
                     $this->pinError('Введено некорректное значение года.');
-                }
                 else
-                {
-                    $this->pinMessage('Год указан верно');
-                }
+                    $this->pinMessage('Год указан');
                 break;
 
-            default:
-                if(strlen($value ) < 0)
-                {
-                    $this->pinError(gettype($value));
-                    $this->pinError($value);
-                    $this->pinError('Введено некорректное значение счетчиков.');
-                }
+
+            case 'water_cold_1':
+                if(strlen($value) == 0)
+                    $this->pinError('Вы не указали счетчик "Холодная вода 1"');
+                else if((int)$value == 0 )
+                    $this->pinMessage('Для счетчика "Холодная вода 1" указан <b>ноль</b> за месяц');
                 else
-                {
-                    $this->pinMessage(gettype($value));
-                    $this->pinMessage($value);
-                }
+                    $this->pinMessage('Счетчик "Холодная вода 1" указан');
                 break;
 
+
+            case 'water_cold_2':
+                if(strlen($value) == 0)
+                    $this->pinError('Вы не указали счетчик "Холодная вода 2"');
+                else if((int)$value == 0 )
+                    $this->pinMessage('Для счетчика "Холодная вода 2" указан <b>ноль</b> за месяц');
+                else
+                    $this->pinMessage('Счетчик "Холодная вода 2" указан');
+                break;
+
+
+            case 'water_hot_1':
+                if(strlen($value) == 0)
+                    $this->pinError('Вы не указали счетчик "Горячая вода 1"');
+                else if((int)$value == 0 )
+                    $this->pinMessage('Для счетчика "Горячая вода 1" указан <b>ноль</b> за месяц');
+                else
+                    $this->pinMessage('Счетчик "Горячая вода 1" указан');
+                break;
+
+
+            case 'water_hot_2':
+                if(strlen($value) == 0)
+                    $this->pinError('Вы не указали счетчик "Горячая вода 2"');
+                else if((int)$value == 0 )
+                    $this->pinMessage('Для счетчика "Горячая вода 2" указан <b>ноль</b> за месяц');
+                else
+                    $this->pinMessage('Счетчик "Горячая вода 2" указан');
+                break;
+
+
+            case 'electricity':
+                if(strlen($value) == 0)
+                    $this->pinError('Вы не указали счетчик "Электричество"');
+                else if((int)$value == 0 )
+                    $this->pinMessage('Для счетчика "Электричество" указан <b>ноль</b> за месяц');
+                else
+                    $this->pinMessage('Счетчик "Электричество" указан');
+                break;
         }
 
         if(count($this->getErrors()))
@@ -395,6 +406,7 @@ class CounterScore{
      */
     private function createRedirectString($switch = true)
     {
+        //@TODO - Требуется переосмысление мути со сбором ссылки редиректа
         $server = $this->getServer();
         if(isset($server['HTTP_REFERER']))
         {
@@ -412,7 +424,6 @@ class CounterScore{
         }
         else
             return false;
-            //$string = $server['REQUEST_SCHEME'] . '://' . $server['SERVER_NAME'];
 
         $this->redirect = $string;
     }

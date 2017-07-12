@@ -1,5 +1,4 @@
 <?
-include 'form-handler.php';
 global $cs;
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
@@ -9,6 +8,7 @@ if(COUNTER_FORM_ERROR_ACTIVE)
     $cs->bug($cs->getServer());
     //exit;
 }
+include 'form-handler.php';
 ?>
 
 <h2>Передайте данные счетчиков</h2>
@@ -24,6 +24,10 @@ if(COUNTER_FORM_ERROR_ACTIVE)
 
         <h3>Персональные данные</h3>
 
+        <label for="#personaldata" class="counter-label personaldata">
+            <input id="personaldata" type="checkbox" name="personaldata" value="1" <?if($cs->getRequestValue('personaldata')):?>checked<?endif?> > Даю разрешение на обработку персональных данных
+        </label>
+
         <label class="counter-label half">
             <input class="counter-input" name="firstname" type="text" placeholder="Ваше имя" value="<?=$cs->getRequestValue('firstname')?>" >
         </label>
@@ -34,10 +38,6 @@ if(COUNTER_FORM_ERROR_ACTIVE)
 
         <label class="counter-label full">
             <input class="counter-input" name="apartment" type="number" placeholder="Номер квартиры" value="<?=$cs->getRequestValue('apartment')?>" >
-        </label>
-
-        <label for="#personaldata" class="counter-label personaldata">
-            <input id="personaldata" type="checkbox" name="personaldata" value="1" <?if($cs->getRequestValue('personaldata')):?>checked<?endif?> > Даю разрешение на обработку персональных данных
         </label>
 
 

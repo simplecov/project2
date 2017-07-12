@@ -1,5 +1,4 @@
 <?php
-global $cs;
 if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
 {
     if($cs->dbDataWrite($cs->getRequest()))
@@ -8,6 +7,7 @@ if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
         header("Location: $redirect");
         exit;
     }
+//@TODO - Требуется переосмысление мути со сбором ссылки редиректа
 //    else
 //    {
 //        $redirect = $cs->getRedirectString(false);

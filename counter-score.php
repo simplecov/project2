@@ -1,6 +1,4 @@
 <?php
-include 'Counter.class.php';
-include 'form-handler.php';
 /*
  * Plugin Name: Counter Score
  * Plugin URI:
@@ -13,10 +11,11 @@ include 'form-handler.php';
  * Network:
  * License: GPL-2.0+
  */
+include 'Counter.class.php';
 global $cs;
 add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTemplate' ));
 
 /**
  * Debug activation
  */
-define('COUNTER_FORM_ERROR_ACTIVE', false);
+define('COUNTER_FORM_ERROR_ACTIVE', true);
