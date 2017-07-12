@@ -385,7 +385,7 @@ class CounterScore{
      * Получает данные сервера
      * @return array
      */
-    private function getServer()
+    public function getServer()
     {
         return $this->server;
     }
@@ -395,9 +395,13 @@ class CounterScore{
      */
     private function setReferer()
     {
-        $this->referer = $this->getServer()['HTTP_REFERER'];
-        echo $this->referer;
-        exit;
+        $server = $this->getServer();
+        if(isset($server['HTTP_REFERER']))
+            $this->referer = $server['HTTP_REFERER'];
+        else
+            $this->referer = $server['HTTP_REFERER'];
+        //echo $this->referer;
+        //exit;
     }
 
 

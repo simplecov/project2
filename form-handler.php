@@ -10,7 +10,7 @@ if($cs->getRequestValue('request_name') == $cs->getFormRequestName())
     }
     else
     {
-        $redirect = $cs->getRedirectString();
+        $redirect = $cs->getRedirectString(false);
 //        header("Location: $redirect" );
 //        exit;
     }
