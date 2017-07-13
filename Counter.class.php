@@ -419,9 +419,9 @@ class CounterScore{
             }
             else
             {
-//                $pattern = '/(&|\?)request_name=' . $this->getFormRequestName() . '/';
-//                $query = preg_replace($pattern, '',  $server['QUERY_STRING']);
-                $string = $server['HTTP_REFERER'] . '?' . $server['QUERY_STRING'];
+                $pattern = '/(&|\?)' . $this->getFormRequestName() . '=submit/';
+                $query = preg_replace($pattern, '',  $server['QUERY_STRING']);
+                $string = '?' . $query . '&' . $this->getFormRequestName() . '=retry';
             }
         }
         else

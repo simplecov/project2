@@ -14,7 +14,7 @@
 include 'Counter.class.php';
 
 global $cs;
-//include 'form-handler.php';
+include 'form-handler.php';
 add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTemplate' ));
 
 

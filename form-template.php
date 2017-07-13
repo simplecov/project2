@@ -1,6 +1,6 @@
 <?
 global $cs;
-include 'form-handler.php';
+//include 'form-handler.php';
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
     $cs->bug($cs->getRequest());
@@ -92,7 +92,7 @@ if(COUNTER_FORM_ERROR_ACTIVE)
             </div>
         <?endif?>
 
-        <input type="hidden" name="request_name" value="<?=$cs->getFormRequestName()?>">
+        <input type="hidden" name="<?=$cs->getFormRequestName()?>" value="submit">
 
         <label class="counter-label full">
             <input class="count-button" type="submit" value="Отправить данные">
