@@ -1,6 +1,5 @@
 <?
 global $cs;
-//include 'form-handler.php';
 if(COUNTER_FORM_ERROR_ACTIVE)
 {
     $cs->bug($cs->getRequest());
@@ -10,7 +9,6 @@ if(COUNTER_FORM_ERROR_ACTIVE)
     //exit;
 }
 ?>
-
 <?if($cs->getRequestValue($cs->getFormRequestName()) == 'y'):?>
     <div class="counter-score-form-success">
         Данные успешно сохранены.

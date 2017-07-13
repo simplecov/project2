@@ -17,8 +17,6 @@ global $cs;
 include 'form-handler.php';
 add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTemplate' ));
 
-
-
 /**
  * Debug activation
  */

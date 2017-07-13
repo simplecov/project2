@@ -4,19 +4,16 @@ namespace Simplecov;
 
 class CounterScore{
 
-    private $pluginFolder;
+    protected $pluginFolder;
 
-    /**
-     * @TODO убрать и работать с простым запросом
-     */
-    private $server;
-    private $request;
+    protected $server;
+    protected $request;
 
-    private $redirect;
-    private $referer;
+    protected $redirect;
+    protected $referer;
 
-    private $tableName;
-    private $tableCols = [
+    protected $tableName;
+    protected $tableCols = [
         'id',
         'firstname',
         'lastname',
@@ -31,10 +28,10 @@ class CounterScore{
         'personaldata',
     ];
 
-    private $messages;
-    private $errors;
+    protected $messages;
+    protected $errors;
 
-    private $formRequestName;
+    protected $formRequestName;
 
     public function __construct()
     {
@@ -408,7 +405,6 @@ class CounterScore{
      */
     private function createRedirectString($switch = true)
     {
-        //@TODO - Требуется переосмысление мути со сбором ссылки редиректа
         $server = $this->getServer();
         if(isset($server['HTTP_REFERER']))
         {
