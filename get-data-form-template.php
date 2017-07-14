@@ -40,35 +40,48 @@ $ejectedData = $dbcs->getEjectedData();
 </form>
 
 <?if($ejectedData):?>
-<table class="result success">
-    <tbody>
-    <tr>
-        <td>ID</td>
-        <td>Имя</td>
-        <td>Фамилия</td>
-        <td>Квартира</td>
-        <td>Месяц</td>
-        <td>Год</td>
-        <td>Холодная вода 1</td>
-        <td>Холодная вода 2</td>
-        <td>Горячая вода 1</td>
-        <td>Горячая вода 2</td>
-        <td>Электричество</td>
-        <td>Согласие</td>
-    </tr>
     <?foreach($ejectedData as $array):?>
 
-        <?foreach($array['personal'] as $key => $value):?>
-            <p><?=$value?></p>
-        <?endforeach?>
+        <div class="result personal">
+            <?foreach($array['personal'] as $key => $value):?>
 
-        <?foreach($array['counters'] as $key => $value):?>
-            <p><?=$value?></p>
-        <?endforeach?>
+                <?switch ($key): ?>
+<? case 'firstname': ?>
+                        <p>Имя: <b><?=$value?></b></p>
+                        <?break;?>
+                    <? case 'lastname': ?>
+                        <p>Фамилия: <b><?=$value?></b></p>
+                        <?break;?>
+                    <? case 'apartment': ?>
+                        <p>Квартира: <b><?=$value?></b></p>
+                        <?break;?>
+                    <?endswitch;?>
+
+            <?endforeach?>
+        </div>
+
+        <div class="result counters">
+            <table>
+                <tbody>
+                <tr>
+                    <td>Холодная вода 1</td>
+                    <td>Холодная вода 2</td>
+                    <td>Горячая вода 1</td>
+                    <td>Горячая вода 2</td>
+                    <td>Электричество</td>
+                </tr>
+                <tr>
+                    <?foreach($array['counters'] as $key => $value):?>
+                        <td>
+                            <b><?=$value?></b>
+                        </td>
+                    <?endforeach?>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     <?endforeach?>
-    </tbody>
-</table>
 <?else:?>
 <div class="result error">
     <p>По вашему запросу данных нет.</p>
