@@ -3,31 +3,46 @@ namespace Simplecov;
 
 class DBHandler
 {
+    private $ejectedData;
+    private $personalData;
+    private $counterData;
+
     private $tableName;
     private $tableCols = [
         'month',
         'year'
     ];
-    private $ejectedData = [
+    private $presonalArrayKeys = [
         'id',
         'firstname',
         'lastname',
         'apartment',
         'month',
         'year',
+        'personaldata',
+    ];
+
+    private $counterArrayKeys = [
         'water_cold_1',
         'water_cold_2',
         'water_hot_1',
         'water_hot_2',
         'electricity',
-        'personaldata',
     ];
 
+    /**
+     * Возвращает полученные из таблицы данные
+     * @return array
+     */
     public function getEjectedData()
     {
         return $this->ejectedData;
     }
 
+    /**
+     * Запрашивает информацию из базы данных
+     * @param array $data
+     */
     public function dbDataEjection($data = [])
     {
         global $wpdb;
@@ -47,14 +62,19 @@ class DBHandler
         }
         $result = $wpdb->get_results($query, ARRAY_A);
 
-        if(count($result) > 0)
-        {
-            $this->ejectedData = $result;
-        }
+        $organizeData = $this->organizeData($result);
+
+        if(count($organizeData) > 0)
+            $this->ejectedData = $organizeData;
         else
             $this->ejectedData = false;
     }
 
+    /**
+     * Очищает массив данных запроса формы от лишних для запроса к базе ключей
+     * @param $data
+     * @return array
+     */
     private function cleanData($data)
     {
         $cleanedData = [];
@@ -67,6 +87,31 @@ class DBHandler
         }
 
         return $cleanedData;
+    }
+
+    private function organizeData($data)
+    {
+        $organizeData = [];
+        foreach($data as $result)
+        {
+            foreach($result as $key => $value)
+            {
+                if(in_array($key, $this->presonalArrayKeys))
+                    $this->personalData[$key] = $value;
+                else if(in_array($key, $this->counterArrayKeys))
+                    $this->counterData[$key] = $value;
+            }
+
+            $separateResult = [];
+            if(count($this->presonalArrayKeys) > 0)
+                $separateResult['personal'] = $this->personalData;
+            if(count($this->counterArrayKeys) > 0)
+                $separateResult['counters'] = $this->counterData;
+
+            $organizeData[] = $separateResult;
+        }
+
+        return $organizeData;
     }
 }
 
