@@ -89,6 +89,11 @@ class DBHandler
         return $cleanedData;
     }
 
+    /**
+     * Обработка масства для удобноговывода в шаблоне
+     * @param $data
+     * @return array
+     */
     private function organizeData($data)
     {
         $organizeData = [];

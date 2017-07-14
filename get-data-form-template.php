@@ -57,13 +57,15 @@ $ejectedData = $dbcs->getEjectedData();
         <td>Согласие</td>
     </tr>
     <?foreach($ejectedData as $array):?>
-        <tr>
-            <?foreach($array as $key => $value):?>
 
-                <td><b><?=$value?></b></td>
+        <?foreach($array['personal'] as $key => $value):?>
+            <p><?=$value?></p>
+        <?endforeach?>
 
-            <?endforeach?>
-        </tr>
+        <?foreach($array['counters'] as $key => $value):?>
+            <p><?=$value?></p>
+        <?endforeach?>
+
     <?endforeach?>
     </tbody>
 </table>
