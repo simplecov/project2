@@ -3,6 +3,8 @@
   background: white;
   padding: 15px 10px;
   width: 100%; }
+  .counter-score-form.get-data {
+    background: #054e92; }
   .counter-score-form .counter-label {
     float: left;
     display: inline-block;
@@ -35,21 +37,6 @@
   .counter-score-form .counter-form-divider {
     width: 100%;
     float: left; }
-  .counter-score-form .result {
-    position: relative;
-    float: left;
-    width: 100%;
-    color: white;
-    padding: 15px;
-    margin-bottom: 15px; }
-    .counter-score-form .result.success {
-      background: #93f73e; }
-    .counter-score-form .result.error {
-      background: #ffe100; }
-    .counter-score-form .result p {
-      font-size: 20px;
-      margin: 0;
-      color: rgba(0, 0, 0, 0.72); }
   .counter-score-form .clearfix:after {
     content: ".";
     display: block;
@@ -65,5 +52,29 @@
   text-align: center; }
   .counter-score-form-success .success-image {
     height: 30px; }
+
+.result {
+  position: relative;
+  float: left;
+  width: 100%;
+  color: white;
+  padding: 15px;
+  margin-bottom: 15px; }
+  .result table {
+    margin: 0; }
+  .result.success {
+    background: #93f73e; }
+  .result.error {
+    background: #ffe100; }
+  .result.personal {
+    margin: 0; }
+    .result.personal p {
+      color: white;
+      display: inline-block;
+      margin-right: 15px; }
+  .result p {
+    font-size: 20px;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72); }
 
 /*# sourceMappingURL=style.css.map */

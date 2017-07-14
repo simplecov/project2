@@ -1,11 +1,9 @@
 <?php
 global $cs;
 global $dbcs;
-
-$cs->bug($dbcs->getEjectedData());
 $ejectedData = $dbcs->getEjectedData();
 ?>
-<form id="get-data-form" method="GET" action="" class="counter-score-form">
+<form id="get-data-form" method="GET" action="" class="counter-score-form get-data">
     <label class="counter-label half">
         <select name="month">
             <option value="1">Январь</option>
@@ -36,54 +34,54 @@ $ejectedData = $dbcs->getEjectedData();
         <input class="count-button" type="submit" value="Получить данные">
     </label>
 
+    <?if($ejectedData):?>
+        <?foreach($ejectedData as $array):?>
+            <hr class="counter-form-divider">
+            <div class="result personal">
+                <?foreach($array['personal'] as $key => $value):?>
+
+                    <?switch ($key): ?>
+<? case 'firstname': ?>
+                            <p>Имя: <b><?=$value?></b></p>
+                            <?break;?>
+                        <? case 'lastname': ?>
+                            <p>Фамилия: <b><?=$value?></b></p>
+                            <?break;?>
+                        <? case 'apartment': ?>
+                            <p>Квартира: <b><?=$value?></b></p>
+                            <?break;?>
+                        <?endswitch;?>
+
+                <?endforeach?>
+            </div>
+
+            <div class="result counters">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>Холодная вода 1</td>
+                        <td>Холодная вода 2</td>
+                        <td>Горячая вода 1</td>
+                        <td>Горячая вода 2</td>
+                        <td>Электричество</td>
+                    </tr>
+                    <tr>
+                        <?foreach($array['counters'] as $key => $value):?>
+                            <td>
+                                <b><?=$value?></b>
+                            </td>
+                        <?endforeach?>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <?endforeach?>
+    <?else:?>
+        <div class="result error">
+            <p>По вашему запросу данных нет.</p>
+        </div>
+    <?endif?>
+
     <div class="clearfix"></div>
 </form>
-
-<?if($ejectedData):?>
-    <?foreach($ejectedData as $array):?>
-
-        <div class="result personal">
-            <?foreach($array['personal'] as $key => $value):?>
-
-                <?switch ($key): ?>
-<? case 'firstname': ?>
-                        <p>Имя: <b><?=$value?></b></p>
-                        <?break;?>
-                    <? case 'lastname': ?>
-                        <p>Фамилия: <b><?=$value?></b></p>
-                        <?break;?>
-                    <? case 'apartment': ?>
-                        <p>Квартира: <b><?=$value?></b></p>
-                        <?break;?>
-                    <?endswitch;?>
-
-            <?endforeach?>
-        </div>
-
-        <div class="result counters">
-            <table>
-                <tbody>
-                <tr>
-                    <td>Холодная вода 1</td>
-                    <td>Холодная вода 2</td>
-                    <td>Горячая вода 1</td>
-                    <td>Горячая вода 2</td>
-                    <td>Электричество</td>
-                </tr>
-                <tr>
-                    <?foreach($array['counters'] as $key => $value):?>
-                        <td>
-                            <b><?=$value?></b>
-                        </td>
-                    <?endforeach?>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    <?endforeach?>
-<?else:?>
-<div class="result error">
-    <p>По вашему запросу данных нет.</p>
-</div>
-<?endif?>

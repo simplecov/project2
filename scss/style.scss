@@ -4,6 +4,10 @@
   padding: 15px 10px;
   width: 100%;
 
+  &.get-data{
+    background: #054e92;
+  }
+
   .counter-label{
     float: left;
     display: inline-block;
@@ -54,29 +58,6 @@
     float: left;
   }
 
-  .result{
-    position: relative;
-    float: left;
-    width: 100%;
-    color: white;
-    padding: 15px;
-    margin-bottom: 15px;
-
-    &.success{
-      background: #93f73e;
-    }
-
-    &.error{
-      background: rgb(255, 225, 0);
-    }
-
-    p{
-      font-size: 20px;
-      margin: 0;
-      color: rgba(0, 0, 0, 0.72);
-    }
-  }
-
   .clearfix:after{
       content: ".";
       display: block;
@@ -95,5 +76,45 @@
 
   .success-image{
     height: 30px;
+  }
+}
+
+.result{
+  position: relative;
+  float: left;
+  width: 100%;
+  color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+
+  table{
+    margin: 0;
+  }
+
+  &.success{
+    background: #93f73e;
+  }
+
+  &.error{
+    background: rgb(255, 225, 0);
+  }
+
+  &.personal{
+    margin: 0;
+    p{
+      color: white;
+      display: inline-block;
+      margin-right: 15px;
+    }
+  }
+
+  &.counters{
+
+  }
+
+  p{
+    font-size: 20px;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72);
   }
 }
