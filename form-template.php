@@ -6,7 +6,6 @@ if(COUNTER_FORM_ERROR_ACTIVE)
     $cs->bug($cs->getRedirectString());
     $cs->bug($cs->getRedirectString(false));
     $cs->bug($cs->getServer());
-    //exit;
 }
 ?>
 <?if($cs->getRequestValue($cs->getFormRequestName()) == 'y'):?>

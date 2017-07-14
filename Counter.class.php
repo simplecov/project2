@@ -59,11 +59,19 @@ class CounterScore{
     }
 
     /**
-     * Для подключения шаблона
+     * Подключение шаблона формы записи данных
      */
-    public static function getTemplate()
+    public static function getInputFormTemplate()
     {
         include 'form-template.php';
+    }
+
+    /**
+     * Подключение шаблона формы получения данных
+     */
+    public static function getOutputFormTemplate()
+    {
+        include 'get-data-form-template.php';
     }
 
     /**

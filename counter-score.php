@@ -12,10 +12,12 @@
  * License: GPL-2.0+
  */
 include 'Counter.class.php';
+include 'DBHandler.class.php';
 
-global $cs;
+
 include 'form-handler.php';
-add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getTemplate' ));
+add_shortcode('counter-score-form', array( '\Simplecov\CounterScore', 'getInputFormTemplate' ));
+add_shortcode('counter-score-form-output', array( '\Simplecov\CounterScore', 'getOutputFormTemplate' ));
 
 /**
  * Debug activation
